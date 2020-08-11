@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog;
 using Text_Em_All_Back_End_Coding_Challenge.Extensions;
 
 namespace Text_Em_All_Back_End_Coding_Challenge
@@ -19,6 +21,7 @@ namespace Text_Em_All_Back_End_Coding_Challenge
   {
     public Startup(IConfiguration configuration)
     {
+      LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), @"\nlog.config"));
       Configuration = configuration;
     }
 
@@ -29,7 +32,7 @@ namespace Text_Em_All_Back_End_Coding_Challenge
     {
       services.ConfigureCors();
       services.ConfigureIISIntegration();
-
+      services.ConfigureLoggerService();
       services.AddControllers();
     }
 
