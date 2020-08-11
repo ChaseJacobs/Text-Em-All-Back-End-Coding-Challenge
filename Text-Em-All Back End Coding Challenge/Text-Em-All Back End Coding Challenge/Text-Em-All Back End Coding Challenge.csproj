@@ -5,5 +5,9 @@
     <RootNamespace>Text_Em_All_Back_End_Coding_Challenge</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
+  </ItemGroup>
+
 
 </Project>

@@ -5,22 +5,22 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:52332",
-      "sslPort": 44319
+      //"sslPort": 44319
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": false,
-      //"launchUrl": "CodingChallenge",
+      "launchBrowser": true,
+      "launchUrl": "WeatherForecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Text_Em_All_Back_End_Coding_Challenge": {
       "commandName": "Project",
-      "launchBrowser": false,
-      //"launchUrl": "CodingChallenge",
+      "launchBrowser": true,
+      "launchUrl": "WeatherForecast",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
