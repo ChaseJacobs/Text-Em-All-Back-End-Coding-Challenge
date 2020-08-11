@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Text_Em_All_Back_End_Coding_Challenge.Controllers
 {
@@ -13,21 +15,24 @@ namespace Text_Em_All_Back_End_Coding_Challenge.Controllers
   public class WeatherForecastController : ControllerBase
   {
     private readonly ILoggerManager _logger;
+    private IRepositoryWrapper _repoWrapper;
 
-    public WeatherForecastController(ILoggerManager logger)
+    public WeatherForecastController(ILoggerManager logger, IRepositoryWrapper repoWrapper)
     {
       _logger = logger;
+      _repoWrapper = repoWrapper;
     }
 
     [HttpGet]
-    public IEnumerable<string> Get()
+    public string Get()
     {
-      _logger.LogInfo("Here is info message from the controller.");
-      _logger.LogDebug("Here is debug message from the controller.");
-      _logger.LogWarn("Here is warn message from the controller.");
-      _logger.LogError("Here is error message from the controller.");
+      _logger.LogInfo("Enterned the Get Method.");
 
-      return new string[] { "value1", "value2" };
+      var student = _repoWrapper.Person.FindByCondition(p => p.PersonId == 4).FirstOrDefault();
+
+
+      var json = JsonConvert.SerializeObject(student);
+      return json;
     }
   }
 }

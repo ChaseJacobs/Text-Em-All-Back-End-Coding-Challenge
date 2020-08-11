@@ -33,6 +33,8 @@ namespace Text_Em_All_Back_End_Coding_Challenge
       services.ConfigureCors();
       services.ConfigureIISIntegration();
       services.ConfigureLoggerService();
+      services.ConfigureSqlContext(Configuration);
+      services.ConfigureRepositoryWrapper();
       services.AddControllers();
     }
 
