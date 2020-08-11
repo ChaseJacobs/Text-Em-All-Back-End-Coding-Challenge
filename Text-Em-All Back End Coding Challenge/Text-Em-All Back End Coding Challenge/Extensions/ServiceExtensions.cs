@@ -1,11 +1,15 @@
 ﻿using Contracts;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Entities.Models;
+using Repository;
 
 namespace Text_Em_All_Back_End_Coding_Challenge.Extensions
 {
@@ -31,6 +35,15 @@ namespace Text_Em_All_Back_End_Coding_Challenge.Extensions
     public static void ConfigureLoggerService(this IServiceCollection services)
     {
       services.AddSingleton<ILoggerManager, LoggerManager>();
+    }
+    public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration config)
+    {
+      var connectionString = config["sqlconnection:connectionString"];
+      services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
+    }
+    public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+    {
+      services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
     }
   }
 }
