@@ -17,8 +17,13 @@ namespace WebApp.Controllers
 
     public CodingChallengeController(ILoggerManager logger, IRepository repo)
     {
+      //initialize logger for debug logging
       _logger = logger;
+
+      //repo to access the database
       _repo = repo;
+
+      //json serializer to show the proper camel case
       DefaultContractResolver contractResolver = new DefaultContractResolver
       {
         NamingStrategy = new CamelCaseNamingStrategy()
@@ -33,60 +38,92 @@ namespace WebApp.Controllers
     [HttpGet]
     public IActionResult Welcome()
     {
-      _logger.LogInfo("Enterned the Get 'welcome' Method.");
+      try
+      {
+        _logger.LogInfo("Entered the Get 'welcome' Method.");
 
-      return Ok("Welcome to Chase Jacobs' Coding Challenge!");
+        return Ok("Welcome to Chase Jacobs' Coding Challenge!");
+      }
+      catch (System.Exception e)
+      {
+        _logger.LogError("Error in Welcome " + e.ToString());
+        throw;
+      }
     }
 
     [HttpGet]
     [Route("student/{studentId}/transcript")]
     public IActionResult GetStudent(int studentId)
     {
-      _logger.LogInfo("Enterned the Get Student Method.");
-
-      var student = _repo.GetStudent(studentId);
-
-      if (student == null)
+      try
       {
-        return NotFound();
-      }
+        _logger.LogInfo("Entered the Get Student Method.");
 
-      var json = JsonConvert.SerializeObject(student, _jsonSerializerSettings);
-      return Ok(json);
+        var student = _repo.GetStudent(studentId);
+
+        if (student == null)
+        {
+          return NotFound();
+        }
+
+        var json = JsonConvert.SerializeObject(student, _jsonSerializerSettings);
+        return Ok(json);
+      }
+      catch (System.Exception e)
+      {
+        _logger.LogError("Error in GetStudent " + e.ToString());
+        throw;
+      }
     }
 
     [HttpGet]
     [Route("students")]
     public IActionResult GetStudents()
     {
-      _logger.LogInfo("Enterned the Get Students Method.");
-
-      var students = _repo.GetStudents();
-
-      if(students == null)
+      try
       {
-        return NotFound();
-      }
+        _logger.LogInfo("Entered the Get Students Method.");
 
-      var json = JsonConvert.SerializeObject(students, _jsonSerializerSettings);
-      return Ok(json);
+        var students = _repo.GetStudents();
+
+        if (students == null)
+        {
+          return NotFound();
+        }
+
+        var json = JsonConvert.SerializeObject(students, _jsonSerializerSettings);
+        return Ok(json);
+      }
+      catch (System.Exception e)
+      {
+        _logger.LogError("Error in GetStudents " + e.ToString());
+        throw;
+      }
     }
 
     [HttpPost]
     [Route("grades")]
     public IActionResult AddUpdateGrade([FromBody] NewGradeDTO grade)
     {
-      _logger.LogInfo("Enterned the Update Grade Method.");
-
-      var newGrade = _repo.AddStudentGrade(grade);
-
-      if (newGrade == null)
+      try
       {
-        return BadRequest();
-      }
+        _logger.LogInfo("Entered the Update Grade Method.");
 
-      var json = JsonConvert.SerializeObject(newGrade, _jsonSerializerSettings);
-      return Ok(json);
+        var newGrade = _repo.AddUpdateStudentGrade(grade);
+
+        if (newGrade == null)
+        {
+          return BadRequest();
+        }
+
+        var json = JsonConvert.SerializeObject(newGrade, _jsonSerializerSettings);
+        return Ok(json);
+      }
+      catch (System.Exception e)
+      {
+        _logger.LogError("Error in AddUpdateGrade " + e.ToString());
+        throw;
+      }
     }
   }
 }

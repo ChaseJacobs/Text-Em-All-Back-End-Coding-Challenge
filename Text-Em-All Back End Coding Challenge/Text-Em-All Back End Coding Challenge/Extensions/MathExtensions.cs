@@ -8,6 +8,7 @@ namespace WebApp.Extensions
 {
   public class MathExtensions
   {
+    //Extension function to generate the GPA
     public static double? GenerateGPA(Person student)
     {
       //GPA is (grade * credits) / (credits)
@@ -25,6 +26,7 @@ namespace WebApp.Extensions
         }
       }
 
+      //if no classes with grade, return null
       if(totalCredits == 0)
       {
         return null;

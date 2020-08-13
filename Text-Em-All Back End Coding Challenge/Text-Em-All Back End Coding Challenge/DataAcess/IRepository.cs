@@ -6,7 +6,7 @@ namespace WebApp.DataAccess
 {
   public interface IRepository
   {
-    NewGradeResponseDTO AddStudentGrade(NewGradeDTO newGradeDTO);
+    NewGradeResponseDTO AddUpdateStudentGrade(NewGradeDTO newGradeDTO);
     StudentDetailedDTO GetStudent(int id);
     List<StudentSimpleDTO> GetStudents();
   }
