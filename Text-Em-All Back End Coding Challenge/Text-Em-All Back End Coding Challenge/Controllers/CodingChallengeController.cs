@@ -12,12 +12,12 @@ namespace Text_Em_All_Back_End_Coding_Challenge.Controllers
 {
   [ApiController]
   [Route("[controller]")]
-  public class WeatherForecastController : ControllerBase
+  public class CodingChallengeController : ControllerBase
   {
     private readonly ILoggerManager _logger;
     private IRepositoryWrapper _repoWrapper;
 
-    public WeatherForecastController(ILoggerManager logger, IRepositoryWrapper repoWrapper)
+    public CodingChallengeController(ILoggerManager logger, IRepositoryWrapper repoWrapper)
     {
       _logger = logger;
       _repoWrapper = repoWrapper;

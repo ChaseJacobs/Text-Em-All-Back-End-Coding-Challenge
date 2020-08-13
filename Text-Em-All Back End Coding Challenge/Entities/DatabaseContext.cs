@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Entities.Models
 {
-    public partial class RepositoryContext : DbContext
+    public partial class DatabaseContext : DbContext
     {
-        public RepositoryContext()
+        public DatabaseContext()
         {
         }
 
-        public RepositoryContext(DbContextOptions<RepositoryContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
         }
@@ -23,15 +23,6 @@ namespace Entities.Models
         public virtual DbSet<OnsiteCourse> OnsiteCourse { get; set; }
         public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<StudentGrade> StudentGrade { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Server=.;Database=School;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

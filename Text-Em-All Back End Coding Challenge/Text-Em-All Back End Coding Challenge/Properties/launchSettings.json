@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "WeatherForecast",
+      "launchUrl": "CodingChallenge",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "Text_Em_All_Back_End_Coding_Challenge": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "WeatherForecast",
+      "launchUrl": "CodingChallenge",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

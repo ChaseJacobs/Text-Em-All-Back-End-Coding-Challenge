@@ -39,7 +39,7 @@ namespace Text_Em_All_Back_End_Coding_Challenge.Extensions
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration config)
     {
       var connectionString = config["sqlconnection:connectionString"];
-      services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
+      services.AddDbContext<DatabaseContext>(o => o.UseSqlServer(connectionString));
     }
     public static void ConfigureRepositoryWrapper(this IServiceCollection services)
     {
