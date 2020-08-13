@@ -7,9 +7,9 @@ namespace WebApp.DTOs
 {
   public class NewGradeDTO
   {
-    public int StudentId { get; set; }
-    public int CourseId { get; set; }
-    public decimal? Grade { get; set; }
+    public int studentId { get; set; }
+    public int courseId { get; set; }
+    public decimal? grade { get; set; }
   }
 
   public class NewGradeResponseDTO

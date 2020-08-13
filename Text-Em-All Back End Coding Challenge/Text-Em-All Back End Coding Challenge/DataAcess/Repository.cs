@@ -88,14 +88,14 @@ namespace WebApp.DataAccess
 
     public NewGradeResponseDTO AddStudentGrade(NewGradeDTO newGradeDTO)
     {
-      var student = this.GetStudent(newGradeDTO.StudentId);
+      var student = this.GetStudent(newGradeDTO.studentId);
 
       if (student == null)
       {
         return null;
       }
 
-      var course = this.RepositoryContext.Course.FirstOrDefault(g => g.CourseId == newGradeDTO.CourseId);
+      var course = this.RepositoryContext.Course.FirstOrDefault(g => g.CourseId == newGradeDTO.courseId);
 
       if (course == null)
       {
@@ -103,19 +103,19 @@ namespace WebApp.DataAccess
       }
 
       //check if the user already has the course
-      var grade = this.RepositoryContext.StudentGrade.FirstOrDefault(g => g.CourseId == newGradeDTO.CourseId && g.StudentId == newGradeDTO.StudentId);
+      var grade = this.RepositoryContext.StudentGrade.FirstOrDefault(g => g.CourseId == newGradeDTO.courseId && g.StudentId == newGradeDTO.studentId);
 
       if (grade != null)
       {
-        grade.Grade = newGradeDTO.Grade;
+        grade.Grade = newGradeDTO.grade;
       }
       else
       {
         grade = new StudentGrade()
         {
-          CourseId = newGradeDTO.CourseId,
-          StudentId = newGradeDTO.StudentId,
-          Grade = newGradeDTO.Grade
+          CourseId = newGradeDTO.courseId,
+          StudentId = newGradeDTO.studentId,
+          Grade = newGradeDTO.grade
         };
 
         grade = this.RepositoryContext.Add(grade).Entity;

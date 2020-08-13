@@ -74,13 +74,18 @@ namespace WebApp.Controllers
 
     [HttpPost]
     [Route("grades")]
-    public IActionResult GetStudents([FromBody] NewGradeDTO grade)
+    public IActionResult AddUpdateGrade([FromBody] NewGradeDTO grade)
     {
       _logger.LogInfo("Enterned the Update Grade Method.");
 
-      var students = _repo.AddStudentGrade(grade);
+      var newGrade = _repo.AddStudentGrade(grade);
 
-      var json = JsonConvert.SerializeObject(students, _jsonSerializerSettings);
+      if (newGrade == null)
+      {
+        return BadRequest();
+      }
+
+      var json = JsonConvert.SerializeObject(newGrade, _jsonSerializerSettings);
       return Ok(json);
     }
   }
