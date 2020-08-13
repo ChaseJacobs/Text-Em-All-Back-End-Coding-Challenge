@@ -25,6 +25,11 @@ namespace WebApp.DataAccess
                             .ThenInclude(g => g.Course)
                               .FirstOrDefault(p => p.PersonId == id && p.Discriminator == PersonDiscriminator.Student);
 
+      if (student == null)
+      {
+        return null;
+      }
+
       var studentGradesDTO = new List<StudentGradeDTO>();
 
       foreach (var grade in student.StudentGrade)
@@ -59,8 +64,13 @@ namespace WebApp.DataAccess
                               .Where(p => p.Discriminator == PersonDiscriminator.Student)
                                 .ToList();
 
+      if (students == null || students.Count == 0)
+      {
+        return null;
+      }
+
       var studentsDTO = new List<StudentSimpleDTO>();
-      foreach(var student in students)
+      foreach (var student in students)
       {
 
         var studentDTO = new StudentSimpleDTO
@@ -76,5 +86,52 @@ namespace WebApp.DataAccess
       return studentsDTO;
     }
 
+    public NewGradeResponseDTO AddStudentGrade(NewGradeDTO newGradeDTO)
+    {
+      var student = this.GetStudent(newGradeDTO.studentId);
+
+      if (student == null)
+      {
+        return null;
+      }
+
+      var course = this.RepositoryContext.Course.FirstOrDefault(g => g.CourseId == newGradeDTO.courseId);
+
+      if (course == null)
+      {
+        return null;
+      }
+
+      //check if the user already has the course
+      var grade = this.RepositoryContext.StudentGrade.FirstOrDefault(g => g.CourseId == newGradeDTO.courseId && g.StudentId == newGradeDTO.studentId);
+
+      if (grade != null)
+      {
+        grade.Grade = newGradeDTO.grade;
+      }
+      else
+      {
+        grade = new StudentGrade()
+        {
+          CourseId = newGradeDTO.courseId,
+          StudentId = newGradeDTO.studentId,
+          Grade = newGradeDTO.grade
+        };
+
+        grade = this.RepositoryContext.Add(grade).Entity;
+      }
+
+      this.RepositoryContext.SaveChanges();
+
+      var newGrade = new NewGradeResponseDTO()
+      {
+        GradeId = grade.EnrollmentId,
+        StudentId = grade.StudentId,
+        CourseId = grade.CourseId,
+        Grade = grade.Grade
+      };
+
+      return newGrade;
+    }
   }
 }

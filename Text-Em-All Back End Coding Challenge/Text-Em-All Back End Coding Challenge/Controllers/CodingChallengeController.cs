@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using WebApp.DataAccess;
+using WebApp.DTOs;
 
 namespace WebApp.Controllers
 {
@@ -30,35 +31,62 @@ namespace WebApp.Controllers
     }
 
     [HttpGet]
-    public string Welcome()
+    public IActionResult Welcome()
     {
       _logger.LogInfo("Enterned the Get 'welcome' Method.");
 
-      return "Welcome to Chase Jacobs' Coding Challenge!";
+      return Ok("Welcome to Chase Jacobs' Coding Challenge!");
     }
 
     [HttpGet]
     [Route("student/{studentId}/transcript")]
-    public string GetStudent(int studentId)
+    public IActionResult GetStudent(int studentId)
     {
       _logger.LogInfo("Enterned the Get Student Method.");
 
       var student = _repo.GetStudent(studentId);
 
+      if (student == null)
+      {
+        return NotFound();
+      }
+
       var json = JsonConvert.SerializeObject(student, _jsonSerializerSettings);
-      return json;
+      return Ok(json);
     }
 
     [HttpGet]
     [Route("students")]
-    public string GetStudents()
+    public IActionResult GetStudents()
     {
       _logger.LogInfo("Enterned the Get Students Method.");
 
       var students = _repo.GetStudents();
 
+      if(students == null)
+      {
+        return NotFound();
+      }
+
       var json = JsonConvert.SerializeObject(students, _jsonSerializerSettings);
-      return json;
+      return Ok(json);
+    }
+
+    [HttpPost]
+    [Route("grades")]
+    public IActionResult AddUpdateGrade([FromBody] NewGradeDTO grade)
+    {
+      _logger.LogInfo("Enterned the Update Grade Method.");
+
+      var newGrade = _repo.AddStudentGrade(grade);
+
+      if (newGrade == null)
+      {
+        return BadRequest();
+      }
+
+      var json = JsonConvert.SerializeObject(newGrade, _jsonSerializerSettings);
+      return Ok(json);
     }
   }
 }
