@@ -1,13 +1,13 @@
-﻿using Contracts;
-using Entities.Models;
+﻿using Database.Models;
+using System.Linq;
 
-namespace Repository
+namespace Database
 {
-  public class PersonRepository : RepositoryBase<Person>, IPersonRepository
+  public partial class Repository : IRepository
   {
-    public PersonRepository(DatabaseContext repositoryContext)
-        : base(repositoryContext)
+    public Person GetPerson(int id)
     {
+      return this.RepositoryContext.Person.FirstOrDefault(p => p.PersonId == id);
     }
   }
 }

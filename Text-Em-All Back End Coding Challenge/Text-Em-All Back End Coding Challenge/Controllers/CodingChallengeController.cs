@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Contracts;
+﻿using Database;
+using LoggerService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Text_Em_All_Back_End_Coding_Challenge.Controllers
@@ -15,20 +10,30 @@ namespace Text_Em_All_Back_End_Coding_Challenge.Controllers
   public class CodingChallengeController : ControllerBase
   {
     private readonly ILoggerManager _logger;
-    private IRepositoryWrapper _repoWrapper;
+    private IRepository _repo;
 
-    public CodingChallengeController(ILoggerManager logger, IRepositoryWrapper repoWrapper)
+    public CodingChallengeController(ILoggerManager logger, IRepository repo)
     {
       _logger = logger;
-      _repoWrapper = repoWrapper;
+      _repo = repo;
     }
 
     [HttpGet]
-    public string Get()
+    public string Welcome()
     {
-      _logger.LogInfo("Enterned the Get Method.");
+      _logger.LogInfo("Enterned the Get 'welcome' Method.");
 
-      var student = _repoWrapper.Person.FindByCondition(p => p.PersonId == 4).FirstOrDefault();
+      return "Welcome to Chase Jacobs' Coding Challenge!";
+    }
+
+    [HttpGet]
+    [Route("Person/{id}")]
+    public string GetPerson(int id)
+    {
+      _logger.LogInfo("Enterned the Get Person Method.");
+
+
+      var student = _repo.GetPerson(id);
 
 
       var json = JsonConvert.SerializeObject(student);

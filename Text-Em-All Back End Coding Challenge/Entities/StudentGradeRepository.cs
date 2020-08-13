@@ -1,13 +1,10 @@
-﻿using Contracts;
-using Entities.Models;
+﻿using Database.Models;
+using System.Linq;
 
-namespace Repository
+namespace Database
 {
-  public class StudentGradeRepository : RepositoryBase<StudentGrade>, IStudentGradeRepository
+  public partial class Repository : IRepository
   {
-    public StudentGradeRepository(DatabaseContext repositoryContext)
-        : base(repositoryContext)
-    {
-    }
+
   }
 }

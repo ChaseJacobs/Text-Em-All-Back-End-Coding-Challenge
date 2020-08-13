@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Database.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Entities.Models
+namespace Database
 {
-    public partial class DatabaseContext : DbContext
+  public partial class DatabaseContext : DbContext
     {
         public DatabaseContext()
         {
