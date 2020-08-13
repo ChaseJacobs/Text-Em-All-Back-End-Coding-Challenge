@@ -3,19 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Database.DTOs
+namespace WebApp.DTOs
 {
-  class StudentDetailedDTO
+  public class GradeDTO
   {
-    public StudentDetailedDTO()
-    {
-      Grades = new List<StudentGrade>();
-    }
-
     public int StudentId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public double GPA { get; set; }
-    public virtual ICollection<StudentGrade> Grades { get; set; }
   }
 }

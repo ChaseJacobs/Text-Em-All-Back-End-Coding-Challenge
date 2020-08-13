@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Text_Em_All_Back_End_Coding_Challenge": {
+    "WebApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "CodingChallenge",

@@ -2,8 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Text_Em_All_Back_End_Coding_Challenge</RootNamespace>
+    <RootNamespace>WebApp</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Extensions\JsonContentNegotiator.cs~RFaf2ebf9.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Entities\Database.csproj" />
