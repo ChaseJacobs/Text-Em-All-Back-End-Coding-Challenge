@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Text_Em_All_Back_End_Coding_Challenge
+namespace WebApp
 {
   public class Program
   {

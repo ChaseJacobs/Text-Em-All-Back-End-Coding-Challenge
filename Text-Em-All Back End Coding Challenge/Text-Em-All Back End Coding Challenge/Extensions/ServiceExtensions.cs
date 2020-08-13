@@ -4,8 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Database;
+using WebApp.DataAccess;
 
-namespace Text_Em_All_Back_End_Coding_Challenge.Extensions
+namespace WebApp.Extensions
 {
   public static class ServiceExtensions
   {

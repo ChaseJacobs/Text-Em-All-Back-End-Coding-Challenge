@@ -7,9 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
-using Text_Em_All_Back_End_Coding_Challenge.Extensions;
+using WebApp.Extensions;
 
-namespace Text_Em_All_Back_End_Coding_Challenge
+namespace WebApp
 {
   public class Startup
   {
